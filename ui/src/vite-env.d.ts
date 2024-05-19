@@ -12,3 +12,15 @@ interface ImportMetaEnv {
 
 
 /// <reference types="vite/client" />
+
+
+interface ImportMetaEnv {
+  readonly VITE_KG_CHAT_BACKEND_ENDPOINT: string;
+  readonly VITE_HAS_API_KEY_ENDPOINT: string;
+  readonly VITE_KG_CHAT_SAMPLE_QUESTIONS_ENDPOINT: string;
+  // Add other environment variables here...
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}

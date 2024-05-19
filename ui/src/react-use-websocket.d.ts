@@ -36,18 +36,14 @@ declare module 'react-use-websocket' {
 
 }
 
-// import { useWebSocket, ReadyState } from 'react-use-websocket';
+import { useWebSocket, ReadyState } from 'react-use-websocket';
+const URI = import.meta.env.VITE_KG_CHAT_BACKEND_ENDPOINT ?? "ws://localhost:7860/text2text";
 
-// const MyComponent: React.FC = () => {
-//   const { sendMessage, lastMessage, readyState } = useWebSocket('ws://example.com');
+const { sendJsonMessage, lastMessage, readyState } = useWebSocket(URI, {
+  shouldReconnect: () => true,
+  reconnectInterval: 5000,
+});
 
-//   return (
-//     <div>
-//       <button onClick={() => sendMessage('Hello WebSocket')}>Send Message</button>
-//       <p>Last message: {lastMessage ? lastMessage.data : 'No message received yet'}</p>
-//       <p>Ready state: {readyState}</p>
-//     </div>
-//   );
-// };
+
   
   
