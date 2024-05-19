@@ -11,7 +11,7 @@ import type {
   ConversationState,
   WebSocketRequest,
   WebSocketResponse,
-} from "./types/websocketTypes";
+} from "../../types/websocketTypes";
 
 const SEND_REQUESTS = true;
 

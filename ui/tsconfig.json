@@ -7,8 +7,9 @@
       "skipLibCheck": true,
       "esModuleInterop": false,
       "allowSyntheticDefaultImports": true,
-      "strict": true,
-      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "strict": true, //
+      "forceConsistentCasingInFileNames": true, //
       "module": "ESNext",
       "moduleResolution": "Node",
       "resolveJsonModule": true,
@@ -16,13 +17,11 @@
       "noEmit": true,
       "types": ["vite/client"],
       "jsx": "react-jsx"
-    },
-    // "include": ["src"],
-    
+    },    
   "include": [
     "src",
-    "vite-env.d.ts", // Adjust the path according to your setup
-    "types",
-    "react-use-websocket.d.ts" // Adjust the path as needed
-  ]
-  }
+              // "src/vite-env.d.ts", // Adjust the path according to your setup
+              "types",
+              // "src/react-use-websocket.d.ts" // Adjust the path as needed
+            ]
+}

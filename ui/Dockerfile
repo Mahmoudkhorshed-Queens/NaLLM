@@ -19,17 +19,20 @@ WORKDIR $FOLDER
 # # Configure npm to use the custom CA
 # RUN npm config set cafile /usr/local/share/ca-certificates/your-ca-certificate.crt
 
+RUN rm -rf node_modules
+RUN rm -rf dist
 
 # Disable strict SSL
 RUN npm config set strict-ssl false
-
+RUN npm install vite
 RUN npm install react react-dom
-RUN npm install --save-dev @types/react @types/react-dom
+RUN npm install --save-dev @types/react @types/react-dom 
+# RUN npm install --save-dev @types/vite
 RUN npm install react-use-websocket
 RUN npm install
+# RUN npm run build
 
 EXPOSE 4173 
 
-RUN npm run build
 
-CMD ["npm", "run", "preview"]
+CMD ["npm", "run", "start"]
