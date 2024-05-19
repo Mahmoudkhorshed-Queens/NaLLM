@@ -17,5 +17,12 @@
       "types": ["vite/client"],
       "jsx": "react-jsx"
     },
-    "include": ["src"],
+    // "include": ["src"],
+    
+  "include": [
+    "src",
+    "vite-env.d.ts", // Adjust the path according to your setup
+    "types",
+    "react-use-websocket.d.ts" // Adjust the path as needed
+  ]
   }

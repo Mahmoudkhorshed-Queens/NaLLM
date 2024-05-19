@@ -23,6 +23,9 @@ WORKDIR $FOLDER
 # Disable strict SSL
 RUN npm config set strict-ssl false
 
+RUN npm install react react-dom
+RUN npm install --save-dev @types/react @types/react-dom
+RUN npm install react-use-websocket
 RUN npm install
 
 EXPOSE 4173 

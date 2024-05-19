@@ -261,55 +261,56 @@ function App() {
     setText2cypherModel(e.target.value)
   }
 
-  return (
-    <div className="flex flex-col min-w-[800px] min-h-[100vh] bg-palette-neutral-bg-strong">
-      {needsApiKey && (
-        <div className="flex justify-end mr-4">
-          <button onClick={openModal}>API Key</button>
-        </div>
-      )}
-        <div className="flex justify-end mr-4">
-        <select value={text2cypherModel} onChange={handleModelChange}>
-            <option value="gpt-3.5-turbo-0613">gpt-3.5-turbo</option>
-            <option value="gpt-4">gpt-4</option>
-        </select>
-        </div>
-      <div className="p-6 mx-auto mt-20 rounded-lg bg-palette-neutral-bg-weak min-h-[6rem] min-w-[18rem] max-w-4xl ">
-        {!serverAvailable && (
-          <div>Server is unavailable, please reload the page to try again.</div>
-        )}
-        {serverAvailable && needsApiKeyLoading && <div>Initializing...</div>}
-        <KeyModal
-          isOpen={showContent && needsApiKey && modalIsOpen}
-          onCloseModal={onCloseModal}
-          onApiKeyChanged={onApiKeyChange}
-          apiKey={apiKey}
-        />
-        {showContent && readyState === ReadyState.OPEN && (
-          <>
-            <ChatContainer
-              chatMessages={chatMessages}
-              loading={conversationState === "waiting"}
-            />
-            <ChatInput
-              onChatInput={onChatInput}
-              loading={conversationState === "waiting"}
-              sampleQuestions={sampleQuestions}
-            />
-            {errorMessage}
-          </>
-        )}{" "}
-        {showContent && readyState === ReadyState.CONNECTING && (
-          <div>Connecting...</div>
-        )}
-        {showContent && readyState === ReadyState.CLOSED && (
-          <div className="flex flex-col">
-            <div>Could not connect to server, reconnecting...</div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+  // return (
+  //   <div className="flex flex-col min-w-[800px] min-h-[100vh] bg-palette-neutral-bg-strong">
+  //     {needsApiKey && (
+  //       <div className="flex justify-end mr-4">
+  //         <button onClick={openModal}>API Key</button>
+  //       </div>
+  //     )}
+  //       <div className="flex justify-end mr-4">
+  //       <select value={text2cypherModel} onChange={handleModelChange}>
+  //           <option value="gpt-3.5-turbo-0613">gpt-3.5-turbo</option>
+  //           <option value="gpt-4">gpt-4</option>
+  //       </select>
+  //       </div>
+  //     <div className="p-6 mx-auto mt-20 rounded-lg bg-palette-neutral-bg-weak min-h-[6rem] min-w-[18rem] max-w-4xl ">
+  //       {!serverAvailable && (
+  //         <div>Server is unavailable, please reload the page to try again.</div>
+  //       )}
+  //       {serverAvailable && needsApiKeyLoading && <div>Initializing...</div>}
+  //       <KeyModal
+  //         isOpen={showContent && needsApiKey && modalIsOpen}
+  //         onCloseModal={onCloseModal}
+  //         onApiKeyChanged={onApiKeyChange}
+  //         apiKey={apiKey}
+  //       />
+  //       {showContent && readyState === ReadyState.OPEN && (
+  //         <>
+  //           <ChatContainer
+  //             chatMessages={chatMessages}
+  //             loading={conversationState === "waiting"}
+  //           />
+  //           <ChatInput
+  //             onChatInput={onChatInput}
+  //             loading={conversationState === "waiting"}
+  //             sampleQuestions={sampleQuestions}
+  //           />
+  //           {errorMessage}
+  //         </>
+  //       )}{" "}
+  //       {showContent && readyState === ReadyState.CONNECTING && (
+  //         <div>Connecting...</div>
+  //       )}
+  //       {showContent && readyState === ReadyState.CLOSED && (
+  //         <div className="flex flex-col">
+  //           <div>Could not connect to server, reconnecting...</div>
+  //         </div>
+  //       )}
+  //     </div>
+  //   </div>
+  // )
+  ;
 }
 
 export default App;
