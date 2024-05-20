@@ -24,9 +24,9 @@ RUN rm -rf dist
 
 # Disable strict SSL
 RUN npm config set strict-ssl false
-RUN npm install vite
-RUN npm install react react-dom
-RUN npm install --save-dev @types/react @types/react-dom 
+RUN npm install vite 
+RUN npm install --save react react-dom
+RUN npm install --save-dev @types/react @types/react-dom  typescript
 # RUN npm install --save-dev @types/vite
 RUN npm install react-use-websocket
 RUN npm install

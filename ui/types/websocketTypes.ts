@@ -1,28 +1,27 @@
-export type WebSocketRequest = {
-  type: "question";
+// types/websocketTypes.ts
+
+export type ConversationState = "ready" | "waiting" | "streaming" | "error";
+
+export interface WebSocketRequest {
+  type: string;
+  message: string;
   question: string;
   api_key?: string;
   model_name?: string;
-};
+}
 
-export type WebSocketResponse =
-  | { type: "start" }
-  | {
-      type: "stream";
-      output: string;
-    }
-  | {
-      type: "end";
-      output: string;
-      generated_cypher: string | null;
-    }
-  | {
-      type: "error";
-      detail: string;
-    }
-  | {
-      type: "debug";
-      detail: string;
-    };
+export interface WebSocketResponse {
+  type: string;
+  detail: string;
+  output?: string;
+  generated_cypher?: string;
+}
 
-export type ConversationState = "waiting" | "streaming" | "ready" | "error";
+export interface ChatMessageObject {
+  id: number;
+  type: "input" | "text";
+  sender: "self" | "bot";
+  message: string;
+  complete: boolean;
+}
+

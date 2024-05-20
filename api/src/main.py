@@ -17,7 +17,7 @@ from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fewshot_examples import get_fewshot_examples
-from llm.openai import OpenAIChat
+from llm.openai import OpenAIChat,Llama2Chat
 from pydantic import BaseModel
 
 
@@ -79,11 +79,16 @@ async def questionProposalsForCurrentDb(payload: questionProposalPayload):
 
     questionProposalGenerator = QuestionProposalGenerator(
         database=neo4j_connection,
-        llm=OpenAIChat(
-            openai_api_key=api_key,
-            model_name="gpt-3.5-turbo-0613",
+        # llm=OpenAIChat(
+        #     openai_api_key=api_key,
+        #     model_name="gpt-3.5-turbo-0613",
+        #     max_tokens=512,
+        #     temperature=0.8,
+        llm=Llama2Chat(
+            # openai_api_key=api_key,
+            model_name="TheBloke/Llama-2-7B-32K-Instruct-GPTQ",
             max_tokens=512,
-            temperature=0.8,
+            temperature=0,
         ),
     )
 
@@ -128,17 +133,33 @@ async def websocket_endpoint(websocket: WebSocket):
                 )
             api_key = openai_api_key if openai_api_key else data.get("api_key")
 
-            default_llm = OpenAIChat(
-                openai_api_key=api_key,
-                model_name=data.get("model_name", "gpt-3.5-turbo-0613"),
+            # default_llm = OpenAIChat(
+            #     openai_api_key=api_key,
+            #     model_name=data.get("model_name", "gpt-3.5-turbo-0613"),
+            # )
+
+            default_llm = Llama2Chat(
+            # openai_api_key=api_key,
+            model_name=data.get("model_name", "TheBloke/Llama-2-7B-32K-Instruct-GPTQ"),
+            max_tokens=512,
+            temperature=0,
             )
+            
+            # summarize_results = SummarizeCypherResult(
+            #     llm=OpenAIChat(
+            #         openai_api_key=api_key,
+            #         model_name="gpt-3.5-turbo-0613",
+            #         max_tokens=128,
+            #     )
+            # )
             summarize_results = SummarizeCypherResult(
-                llm=OpenAIChat(
-                    openai_api_key=api_key,
-                    model_name="gpt-3.5-turbo-0613",
-                    max_tokens=128,
-                )
+                llm=Llama2Chat(
+            # openai_api_key=api_key,
+            model_name=data.get("model_name", "TheBloke/Llama-2-7B-32K-Instruct-GPTQ"),
+            max_tokens=128,
+            temperature=0,
             )
+                )
 
             text2cypher = Text2Cypher(
                 database=neo4j_connection,
@@ -205,9 +226,16 @@ async def root(payload: ImportPayload):
     try:
         result = ""
 
-        llm = OpenAIChat(
-            openai_api_key=api_key, model_name="gpt-3.5-turbo-16k", max_tokens=4000
-        )
+        # llm = OpenAIChat(
+        #     openai_api_key=api_key, model_name="gpt-3.5-turbo-16k", max_tokens=4000
+        # )
+        llm=Llama2Chat(
+            # openai_api_key=api_key,
+            model_name="TheBloke/Llama-2-7B-32K-Instruct-GPTQ",
+            max_tokens=512,
+            temperature=0,
+            )
+                
 
         if not payload.neo4j_schema:
             extractor = DataExtractor(llm=llm)
@@ -246,11 +274,17 @@ async def companyInformation(payload: companyReportPayload):
         )
     api_key = openai_api_key if openai_api_key else payload.api_key
 
-    llm = OpenAIChat(
-        openai_api_key=api_key,
-        model_name="gpt-3.5-turbo-16k-0613",
-        max_tokens=512,
-    )
+    # llm = OpenAIChat(
+    #     openai_api_key=api_key,
+    #     model_name="gpt-3.5-turbo-16k-0613",
+    #     max_tokens=512,
+    # )
+    llm=Llama2Chat(
+            model_name="TheBloke/Llama-2-7B-32K-Instruct-GPTQ",
+            max_tokens=512,
+            temperature=0,
+            )
+                
     print("Running company report for " + payload.company)
     company_report = CompanyReport(neo4j_connection, payload.company, llm)
     result = company_report.run()

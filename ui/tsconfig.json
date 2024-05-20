@@ -16,7 +16,8 @@
       "isolatedModules": true,
       "noEmit": true,
       "types": ["vite/client"],
-      "jsx": "react-jsx"
+      "jsx": "react-jsx",
+      "baseUrl": "./src"
     },    
   "include": [
     "src",
@@ -25,3 +26,4 @@
               // "src/react-use-websocket.d.ts" // Adjust the path as needed
             ]
 }
+
