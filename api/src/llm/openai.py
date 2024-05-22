@@ -82,11 +82,16 @@ from typing import (
     List,
 )
 
-from transformers import LlamaForCausalLM, LlamaTokenizer
+# from transformers import LlamaForCausalLM, LlamaTokenizer
 import torch
 from basellm import BaseLLM
 from retry import retry
 
+# Load model directly
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+# tokenizer = AutoTokenizer.from_pretrained("TheBloke/Llama-2-7B-32K-Instruct-GPTQ", trust_remote_code=True)
+# model = AutoModelForCausalLM.from_pretrained("TheBloke/Llama-2-7B-32K-Instruct-GPTQ", trust_remote_code=True)
 
 class Llama2Chat(BaseLLM):
     """Wrapper around HuggingFace Llama2 large language models."""
@@ -97,8 +102,8 @@ class Llama2Chat(BaseLLM):
         max_tokens: int = 2056,
         temperature: float = 0.0,
     ) -> None:
-        self.tokenizer = LlamaTokenizer.from_pretrained(model_name)
-        self.model = LlamaForCausalLM.from_pretrained(model_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+        self.model = AutoModelForCausalLM.from_pretrained(model_name, trust_remote_code=True)
         self.max_tokens = max_tokens
         self.temperature = temperature
 
