@@ -5,7 +5,7 @@
 
 # import openai
 # import tiktoken
-# from llm.basellm import BaseLLM
+from llm.basellm import BaseLLM
 # from retry import retry
 
 
@@ -84,7 +84,7 @@ from typing import (
 
 # from transformers import LlamaForCausalLM, LlamaTokenizer
 import torch
-from basellm import BaseLLM
+# from basellm import BaseLLM
 from retry import retry
 
 # Load model directly

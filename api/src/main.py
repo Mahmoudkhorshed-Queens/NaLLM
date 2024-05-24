@@ -17,7 +17,9 @@ from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fewshot_examples import get_fewshot_examples
-from llm.openai import OpenAIChat,Llama2Chat
+from llm.openai import Llama2Chat
+# from llm.openai import OpenAIChat
+
 from pydantic import BaseModel
 
 
