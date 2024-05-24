@@ -12,7 +12,7 @@ RUN mkdir -p $FOLDER
 
 # Install packages
 COPY ./requirements.txt $FOLDER/requirements.txt
-RUN pip install -r $FOLDER/requirements.txt
+RUN pip install --no-cache-dir -r $FOLDER/requirements.txt
 
 # Copy the project files into the container
 COPY ./src $FOLDER/src
